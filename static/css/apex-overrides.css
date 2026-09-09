@@ -1,0 +1,29 @@
+/* Page CSS Class in APEX: prime-apex-page */
+.prime-apex-page .t-Body-main,
+.prime-apex-page .t-Body-content,
+.prime-apex-page .t-Body-contentInner,
+.prime-apex-page .t-Region,
+.prime-apex-page .t-Region-body,
+.prime-apex-page .t-Region-bodyWrap {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.prime-apex-page .t-Body-content {
+  min-height: 100vh;
+}
+
+.prime-apex-page .t-Region-header,
+.prime-apex-page .t-Body-actions,
+.prime-apex-page .t-Body-nav,
+.prime-apex-page .t-Header {
+  display: none;
+}
+
+.prime-apex-page .apex_wait_overlay {
+  z-index: 110;
+}

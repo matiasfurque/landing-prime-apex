@@ -1,0 +1,10 @@
+{
+  "name": "jumbo-prime-apex",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Componentes y recursos de la landing Jumbo Prime para Oracle APEX",
+  "scripts": {
+    "check": "node tools/validate.mjs",
+    "preview": "python -m http.server 4174"
+  }
+}

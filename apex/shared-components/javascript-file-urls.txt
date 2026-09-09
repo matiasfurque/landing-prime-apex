@@ -1,0 +1,6 @@
+#APP_FILES#js/prime-config.js
+#APP_FILES#js/components/intro.js
+#APP_FILES#js/components/benefit-drawer.js
+#APP_FILES#js/components/offers-carousel.js
+#APP_FILES#js/components/faq-accordion.js
+#APP_FILES#js/prime-app.js

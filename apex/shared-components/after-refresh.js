@@ -1,0 +1,1 @@
+PrimeLanding.init(document);

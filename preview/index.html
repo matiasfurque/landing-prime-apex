@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jumbo Prime Argentina - APEX Preview</title>
+    <meta name="description" content="Vista previa de la landing componentizada para Oracle APEX." />
+    <link rel="stylesheet" href="../static/css/prime.css" />
+  </head>
+  <body>
+    <div data-region="intro"></div>
+    <div data-region="header"></div>
+    <main>
+      <div data-region="hero"></div>
+      <div data-region="benefits"></div>
+      <div data-region="benefit-drawer"></div>
+      <div data-region="offers"></div>
+      <div data-region="faq"></div>
+    </main>
+    <div data-region="footer"></div>
+
+    <script>
+      window.PrimeLandingConfig = {
+        assetBase: "../static/",
+        autoInit: false,
+        benefitProcess: null
+      };
+    </script>
+    <script src="../static/js/prime-config.js"></script>
+    <script src="../static/js/components/intro.js"></script>
+    <script src="../static/js/components/benefit-drawer.js"></script>
+    <script src="../static/js/components/offers-carousel.js"></script>
+    <script src="../static/js/components/faq-accordion.js"></script>
+    <script src="../static/js/prime-app.js"></script>
+    <script src="component-loader.js"></script>
+  </body>
+</html>
