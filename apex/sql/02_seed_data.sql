@@ -214,6 +214,28 @@ begin
   upsert_item('smiles', 'Canje desde Jumbo Más.', 20);
   upsert_item('smiles', 'Beneficio ideal para sumar millas más rápido.', 30);
 
+  upsert_benefit(
+    '365',
+    'Experiencias',
+    'Beneficios 365',
+    'Disfrutá beneficios exclusivos en experiencias seleccionadas, de acuerdo con las condiciones de la alianza.',
+    60
+  );
+  upsert_item('365', 'Experiencias y propuestas seleccionadas.', 10);
+  upsert_item('365', 'Beneficios sujetos a vigencia.', 20);
+  upsert_item('365', 'Consultá las condiciones antes de usarlo.', 30);
+
+  upsert_benefit(
+    'atencion',
+    'Atención Prime',
+    'Canal exclusivo de atención',
+    'Contá con un canal de atención pensado para acompañarte cuando necesitás resolver una consulta sobre tu membresía.',
+    70
+  );
+  upsert_item('atencion', 'Atención para consultas sobre tu membresía.', 10);
+  upsert_item('atencion', 'Información sobre beneficios vigentes.', 20);
+  upsert_item('atencion', 'Canales disponibles según las condiciones comunicadas.', 30);
+
   upsert_offer(
     'despensa', 'Despensa Prime', 'Hasta 35% de descuento',
     'En arroz, aceites, pastas, salsas y básicos para llenar la alacena.',

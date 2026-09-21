@@ -7,11 +7,24 @@
 
   const getDrawer = () => document.querySelector("[data-benefit-drawer]");
 
+  const mergeWithFallback = (benefitKey, payload) => {
+    const fallback = namespace.allianceDetails[benefitKey];
+
+    if (!fallback) return payload;
+
+    return {
+      ...fallback,
+      ...payload,
+      image: payload?.image || fallback.image,
+      items: Array.isArray(payload?.items) && payload.items.length ? payload.items : fallback.items
+    };
+  };
+
   const loadBenefit = (benefitKey) => {
     const processName = namespace.config.benefitProcess;
 
     if (!processName || !window.apex?.server?.process) {
-      return Promise.resolve(namespace.benefits[benefitKey]);
+      return Promise.resolve(namespace.allianceDetails[benefitKey]);
     }
 
     return new Promise((resolve, reject) => {
@@ -26,32 +39,29 @@
               return;
             }
 
-            resolve(payload);
+            resolve(mergeWithFallback(benefitKey, payload));
           },
           error: (_request, status, error) => reject(new Error(error || status))
         }
       );
-    }).catch(() => namespace.benefits[benefitKey]);
+    }).catch(() => namespace.allianceDetails[benefitKey]);
   };
 
   const renderBenefit = (drawer, detail) => {
-    const logoHost = drawer.querySelector("[data-drawer-logo]");
+    const imageHost = drawer.querySelector("[data-drawer-logo]");
     const listHost = drawer.querySelector("[data-drawer-list]");
-    const logos = Array.isArray(detail.logos) ? detail.logos : [];
     const items = Array.isArray(detail.items) ? detail.items : [];
+    const image = detail.image || {};
 
     drawer.querySelector("[data-drawer-eyebrow]").textContent = detail.eyebrow || "Beneficio Prime";
     drawer.querySelector("[data-drawer-title]").textContent = detail.title || "Beneficio Prime";
     drawer.querySelector("[data-drawer-description]").textContent = detail.description || "";
-    logoHost.classList.toggle("is-row", logos.length > 1);
-    logoHost.replaceChildren(
-      ...logos.map((logo) => {
-        const image = document.createElement("img");
-        image.src = namespace.assetUrl(logo.src);
-        image.alt = logo.alt || "";
-        return image;
-      })
-    );
+
+    const imageElement = document.createElement("span");
+    imageElement.className = `drawer-image drawer-image--${image.position || "center"}`;
+    imageElement.style.backgroundImage = `url("${namespace.assetUrl(image.src || "assets/alliances-prime-placeholder-one.png")}")`;
+    imageHost.replaceChildren(imageElement);
+
     listHost.replaceChildren(
       ...items.map((item) => {
         const listItem = document.createElement("li");
@@ -75,7 +85,7 @@
 
   const open = async (benefitKey, trigger) => {
     const drawer = getDrawer();
-    const fallback = namespace.benefits[benefitKey];
+    const fallback = namespace.allianceDetails[benefitKey];
 
     if (!drawer || !fallback) return;
 
@@ -116,25 +126,15 @@
     eventsBound = true;
     document.addEventListener("click", (event) => {
       const closeTrigger = event.target.closest("[data-benefit-close]");
-
       if (closeTrigger) {
         close();
         return;
       }
 
       const openTrigger = event.target.closest("[data-benefit-open]");
-
       if (openTrigger) {
         event.preventDefault();
         open(openTrigger.dataset.benefitOpen, openTrigger);
-        return;
-      }
-
-      const card = event.target.closest("[data-benefit-card]");
-      const isInteractive = event.target.closest("a, button, input, select, textarea");
-
-      if (card && !isInteractive) {
-        open(card.dataset.benefitCard, card);
       }
     });
 
@@ -148,11 +148,5 @@
     });
   };
 
-  namespace.drawer = {
-    init() {
-      bindEvents();
-    },
-    open,
-    close
-  };
+  namespace.drawer = { init: bindEvents, open, close };
 })(window, document);

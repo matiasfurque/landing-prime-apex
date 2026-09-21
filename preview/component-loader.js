@@ -1,7 +1,18 @@
 (function loadApexRegions() {
   "use strict";
 
-  const regions = ["intro", "header", "hero", "benefits", "benefit-drawer", "offers", "faq", "footer"];
+  const regions = [
+    "intro",
+    "header",
+    "hero",
+    "benefits",
+    "offers",
+    "monthly",
+    "alliances",
+    "benefit-drawer",
+    "faq",
+    "footer"
+  ];
 
   const loadRegion = async (name) => {
     const host = document.querySelector(`[data-region="${name}"]`);

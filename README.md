@@ -1,59 +1,66 @@
 # Jumbo Prime - versión Oracle APEX
 
-Este proyecto reproduce la landing de Jumbo Prime y la organiza para implementarla de forma profesional en Oracle APEX. La landing original no forma parte de esta carpeta y no se modifica.
+Implementación componentizada de la landing Jumbo Prime para Oracle APEX. Este repositorio es independiente de `landing prime 2`: la landing visual original se conserva sin cambios y funciona como referencia de diseño.
 
-## Estructura
+## Arquitectura
 
 ```text
 landing prime apex/
-|-- preview/                    Vista previa local ensamblada desde las regiones
+|-- preview/                    Vista previa local que ensambla las mismas regiones APEX
 |-- static/
-|   |-- assets/                Imágenes y logos
-|   |-- fonts/                 Familia Raleway autorizada
-|   |-- css/prime.css          Estilos de la landing
+|   |-- assets/                 Imágenes y logos de la landing
+|   |-- fonts/                  Familia Raleway autorizada
+|   |-- css/                    Estilos y ajustes del tema Universal Theme
 |   `-- js/
-|       |-- prime-config.js    Configuración y datos de respaldo
-|       |-- prime-app.js       Inicialización general
-|       `-- components/        Un archivo por comportamiento
-`-- apex/
-    |-- regions/               Una región APEX por bloque visual
-    |-- processes/             Procesos AJAX de APEX
-    |-- shared-components/     Configuración para Static Application Files
-    `-- sql/                   Modelo de datos y contenido inicial
+|       |-- prime-config.js     Configuración y contenido de respaldo
+|       |-- prime-app.js        Inicialización idempotente
+|       `-- components/         Un módulo por interacción
+|-- apex/
+|   |-- regions/                Un archivo HTML por región visual
+|   |-- processes/              Proceso AJAX para el panel de alianzas
+|   |-- shared-components/      Referencias a Static Application Files
+|   `-- sql/                    Modelo de contenido y datos iniciales
+`-- tools/                      Validaciones de estructura y sintaxis
 ```
+
+## Componentes
+
+- Intro con elefantito y respeto por `prefers-reduced-motion`.
+- Header y hero con rutas reales de registro e ingreso.
+- Carrusel autónomo de Beneficios Prime, con controles, pausa en interacción y soporte táctil.
+- Carrusel de Ofertas semanales, con progreso, controles y soporte táctil.
+- Secciones independientes de Mensuales Prime y Alianzas.
+- Panel lateral accesible para el detalle de alianzas, con fallback local y proceso AJAX de APEX.
+- FAQ accesible y animaciones de aparición idempotentes, compatibles con refresh de regiones APEX.
 
 ## Vista previa local
 
-La vista previa utiliza los mismos fragmentos de `apex/regions` que después se cargan en APEX. Por seguridad del navegador debe abrirse mediante un servidor HTTP, no directamente con doble clic.
-
-Desde esta carpeta:
+Desde esta carpeta, ejecutar:
 
 ```powershell
-python -m http.server 4174
+npm run preview
 ```
 
-Después abrir `http://127.0.0.1:4174/preview/`.
+Luego abrir `http://127.0.0.1:4174/preview/`.
 
 ## Implementación en APEX
 
-1. Ejecutar `apex/sql/01_schema.sql` una sola vez en SQL Workshop.
-2. Ejecutar `apex/sql/02_seed_data.sql` para cargar beneficios, ofertas y preguntas frecuentes.
-3. Subir el contenido de `static` en Shared Components > Static Application Files, conservando las carpetas.
-4. Crear una página Blank con Page Template `Blank with Attributes` o equivalente sin navegación lateral.
-5. Crear regiones Static Content en el orden indicado en `apex/regions/README.md` y pegar el contenido de cada archivo.
-6. Configurar los archivos CSS y JavaScript con las listas de `apex/shared-components`.
-7. Crear un Application Process AJAX llamado `GET_PRIME_BENEFIT` con el código de `apex/processes/get_prime_benefit.sql`.
-8. En Page > JavaScript > Function and Global Variable Declaration, pegar `apex/shared-components/page-global-config.js`.
-9. En una Dynamic Action `After Refresh` de las regiones dinámicas ejecutar `PrimeLanding.init(document);`.
+1. Ejecutar `apex/sql/01_schema.sql` una única vez en SQL Workshop.
+2. Ejecutar `apex/sql/02_seed_data.sql` para cargar beneficios, ofertas y preguntas frecuentes iniciales.
+3. Subir el contenido de `static` en **Shared Components > Static Application Files**, conservando las carpetas.
+4. Crear una página Blank y asignar la clase CSS `prime-apex-page`.
+5. Crear las regiones en el orden indicado en [apex/regions/README.md](apex/regions/README.md).
+6. Cargar los CSS y JavaScript indicados en `apex/shared-components`.
+7. Crear el proceso AJAX `GET_PRIME_BENEFIT` desde `apex/processes/get_prime_benefit.sql`.
+8. Pegar `page-global-config.js` en **Function and Global Variable Declaration**.
+9. En una Dynamic Action **After Refresh** de cualquier región dinámica, ejecutar `PrimeLanding.init(document);`.
 
-## Criterio de componentes
+Los recursos usan `#APP_FILES#` en el HTML y rutas relativas dentro del CSS, por lo que funcionan en cualquier ambiente APEX después de cargar los Static Application Files.
 
-- Cada sección visual es una región independiente y puede cambiarse sin afectar a las demás.
-- Los comportamientos interactivos son idempotentes: APEX puede refrescar una región sin duplicar eventos.
-- El detalle de beneficios consulta APEX por AJAX y conserva datos locales como respaldo para la vista previa.
-- Beneficios, ofertas y preguntas quedan modelados en tablas para administrarlos sin editar código.
-- Las rutas usan `#APP_FILES#`, por lo que imágenes, fuentes, CSS y JavaScript funcionan en cualquier ambiente APEX.
+## Verificación
 
-## Qué falta para obtener un export de aplicación
+```powershell
+npm run check
+```
 
-El número de aplicación, workspace, esquema y versión de APEX dependen del entorno de la empresa. Una vez creada la aplicación allí, APEX puede exportarla como un único archivo SQL instalable. Este proyecto deja preparada la arquitectura y todo el código fuente para hacer esa carga sin rehacer la landing.
+El chequeo valida regiones requeridas, IDs duplicados, recursos estáticos y sintaxis de los módulos JavaScript.

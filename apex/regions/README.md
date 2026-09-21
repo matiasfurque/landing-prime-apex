@@ -1,20 +1,20 @@
 # Regiones de la página APEX
 
-Crear regiones de tipo **Static Content** y usar `No Template` cuando el template agregue contenedores o márgenes visibles.
+Crear regiones de tipo **Static Content** y usar `No Template` cuando el tema agregue contenedores, márgenes o fondos visibles.
 
-Orden recomendado:
+| Secuencia | Archivo | Static ID sugerido | Responsabilidad |
+|---:|---|---|---|
+| 10 | `intro.html` | `prime_intro` | Pantalla de bienvenida. |
+| 20 | `header.html` | `prime_header` | Navegación global. |
+| 30 | `hero.html` | `prime_hero` | Propuesta principal y accesos. |
+| 40 | `benefits.html` | `prime_benefits` | Carrusel de beneficios Prime. |
+| 50 | `offers.html` | `prime_offers` | Carrusel de ofertas semanales. |
+| 60 | `monthly.html` | `prime_monthly` | Tarjetas de mensuales Prime. |
+| 70 | `alliances.html` | `prime_alliances` | Tarjetas de alianzas con apertura de detalle. |
+| 80 | `benefit-drawer.html` | `prime_benefit_drawer` | Panel lateral reutilizable para alianzas. |
+| 90 | `faq.html` | `prime_faq` | Preguntas frecuentes y CTA final. |
+| 100 | `footer.html` | `prime_footer` | Pie de página. |
 
-| Secuencia | Archivo | Static ID sugerido |
-|---:|---|---|
-| 10 | `intro.html` | `prime_intro` |
-| 20 | `header.html` | `prime_header` |
-| 30 | `hero.html` | `prime_hero` |
-| 40 | `benefits.html` | `prime_benefits` |
-| 50 | `benefit-drawer.html` | `prime_benefit_drawer` |
-| 60 | `offers.html` | `prime_offers` |
-| 70 | `faq.html` | `prime_faq` |
-| 80 | `footer.html` | `prime_footer` |
+El orden es parte del contrato visual. `benefit-drawer` debe existir en la página aunque el contenido de sus alianzas se consulte por AJAX.
 
-La región `benefit-drawer` debe permanecer en la página aunque sus datos se obtengan por AJAX. Los IDs y atributos `data-*` son el contrato estable entre el HTML y los controladores JavaScript.
-
-Para una segunda etapa totalmente administrable, reemplazar el contenido repetido de `benefits`, `offers` y `faq` por regiones Cards/Classic Report usando las consultas de `apex/sql/03_region_queries.sql`. La primera implementación conserva el HTML exacto para garantizar paridad visual.
+Los atributos `data-*`, IDs y clases de cada región son el contrato estable con los módulos JavaScript. Para una segunda etapa administrable, las tarjetas repetidas se pueden reemplazar por regiones Cards o Classic Report sin cambiar los controladores ni los estilos.

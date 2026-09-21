@@ -4,7 +4,18 @@ import { fileURLToPath } from "node:url";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const regionDirectory = join(projectRoot, "apex", "regions");
-const requiredRegions = ["intro", "header", "hero", "benefits", "benefit-drawer", "offers", "faq", "footer"];
+const requiredRegions = [
+  "intro",
+  "header",
+  "hero",
+  "benefits",
+  "offers",
+  "monthly",
+  "alliances",
+  "benefit-drawer",
+  "faq",
+  "footer"
+];
 const errors = [];
 const ids = new Map();
 

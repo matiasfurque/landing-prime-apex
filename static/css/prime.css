@@ -164,6 +164,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   color: var(--ink);
   background: var(--page);
   font-family: var(--font-regular);
@@ -488,60 +489,171 @@ a {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(320px, 1fr) minmax(360px, 1fr);
-  min-height: 420px;
-  background: var(--pink-soft);
+  position: relative;
+  isolation: isolate;
+  min-height: 570px;
+  overflow: hidden;
+  background: #191814;
 }
 
-.hero-media {
-  min-height: 420px;
+.hero-background {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
   background:
-    linear-gradient(90deg, rgba(235, 219, 207, 0.06), rgba(235, 219, 207, 0.38)),
-    url("../assets/hero-jumbo-prime.png");
-  background-position: 76% center;
+    linear-gradient(90deg, rgba(6, 10, 8, 0.88) 0%, rgba(10, 13, 10, 0.68) 32%, rgba(9, 12, 9, 0.2) 63%, rgba(9, 12, 9, 0.32) 100%),
+    url("../assets/hero-prime-market-temporary.png");
+  background-position: center;
   background-size: cover;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(310px, 370px);
+  align-items: center;
+  gap: clamp(36px, 7vw, 124px);
+  min-height: 570px;
+  padding: clamp(44px, 6vw, 82px) clamp(20px, 6vw, 86px);
 }
 
 .hero-copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 18px;
-  padding: clamp(34px, 6vw, 72px);
-}
-
-.eyebrow {
-  margin: 0;
-  color: var(--green);
-  font-family: var(--font-extrabold);
-  font-size: 14px;
-  font-weight: 900;
-  text-transform: uppercase;
+  align-items: flex-start;
+  gap: 19px;
+  max-width: 640px;
+  padding: 0;
 }
 
 .hero h1 {
-  max-width: 650px;
+  max-width: 680px;
   margin: 0;
+  color: white;
   font-family: var(--font-black);
-  font-size: clamp(34px, 4.5vw, 56px);
-  line-height: 1.03;
+  font-size: clamp(46px, 5.3vw, 74px);
+  line-height: 0.98;
   letter-spacing: 0;
 }
 
-.hero-text,
-.price-line {
-  max-width: 640px;
-  margin: 0;
-  color: var(--muted);
-  font-family: var(--font-medium);
-  font-size: 18px;
+.hero h1 span {
+  color: var(--magenta);
 }
 
-.price-line {
-  color: var(--ink);
+.hero-text {
+  max-width: 570px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: var(--font-medium);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.hero-cta,
+.access-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  border-radius: 8px;
   font-family: var(--font-bold);
-  font-weight: 700;
+  font-weight: 800;
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.hero-cta {
+  min-width: 286px;
+  padding: 0 27px;
+  color: white;
+  background: var(--magenta);
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+}
+
+.hero-cta:hover,
+.hero-cta:focus-visible,
+.access-button:hover,
+.access-button:focus-visible {
+  background: var(--magenta-dark);
+  transform: translateY(-2px);
+}
+
+.hero-note {
+  margin: -8px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-medium);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prime-access-card {
+  width: 100%;
+  padding: clamp(26px, 3vw, 34px);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: 10px;
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
+}
+
+.access-card-brand {
+  display: grid;
+  width: max-content;
+  margin-bottom: 27px;
+  line-height: 0.78;
+}
+
+.access-card-brand .brand-jumbo {
+  font-size: 10px;
+}
+
+.access-card-brand .brand-prime {
+  font-size: 29px;
+}
+
+.access-card-brand .brand-prime::after {
+  width: 7px;
+  height: 7px;
+  margin-left: 2px;
+  transform: translateY(-10px);
+}
+
+.prime-access-card h2 {
+  margin: 0 0 9px;
+  font-family: var(--font-black);
+  font-size: 27px;
+  line-height: 1.05;
+}
+
+.prime-access-card > p:not(.access-card-footer) {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-family: var(--font-medium);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.access-button {
+  width: 100%;
+  padding: 0 18px;
+  color: white;
+  background: var(--magenta);
+  box-shadow: 0 8px 18px rgba(178, 15, 133, 0.17);
+}
+
+.access-card-footer {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-family: var(--font-bold);
+  font-size: 13px;
+  text-align: center;
+}
+
+.access-card-footer a {
+  color: var(--green);
+  font-family: var(--font-extrabold);
 }
 
 .benefits-section,
@@ -577,98 +689,644 @@ a {
   font-size: 17px;
 }
 
-.benefits-grid {
+.prime-benefit-carousel {
+  position: relative;
+  max-width: 1120px;
+  height: 410px;
+  margin: 0 auto;
+}
+
+.prime-benefit-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.prime-benefit-slide {
+  position: absolute;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 28px;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  inset: 0;
+  overflow: hidden;
+  background: white;
+  border: 1px solid rgba(178, 15, 133, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 20px 46px rgba(44, 32, 48, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(18px);
+  transition: opacity 480ms ease, transform 480ms ease;
+}
+
+.prime-benefit-slide.is-active {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.prime-benefit-visual {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 358px;
+  padding: clamp(28px, 4vw, 44px);
+  color: white;
+  overflow: hidden;
+}
+
+.prime-benefit-visual::before,
+.prime-benefit-visual::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.prime-benefit-visual::before {
+  background: url("../assets/hero-prime-market-temporary.png") center / cover;
+  opacity: 0.44;
+}
+
+.prime-benefit-visual::after {
+  background: var(--prime-benefit-overlay);
+}
+
+.prime-benefit-visual > * {
+  position: relative;
+  z-index: 1;
+}
+
+.prime-benefit-visual--shipping {
+  --prime-benefit-overlay: linear-gradient(135deg, rgba(188, 17, 142, 0.96), rgba(150, 4, 107, 0.86));
+}
+
+.prime-benefit-visual--discounts {
+  --prime-benefit-overlay: linear-gradient(135deg, rgba(21, 117, 74, 0.96), rgba(76, 160, 76, 0.84));
+}
+
+.prime-benefit-visual--points,
+.prime-benefit-visual--experiences,
+.prime-benefit-visual--catalog-discounts,
+.prime-benefit-visual--home,
+.prime-benefit-visual--membership {
+  color: var(--ink);
+}
+
+.prime-benefit-visual--points::before,
+.prime-benefit-visual--experiences::before,
+.prime-benefit-visual--catalog-discounts::before,
+.prime-benefit-visual--home::before,
+.prime-benefit-visual--membership::before {
+  background: none;
+  opacity: 1;
+}
+
+.prime-benefit-visual--points::after,
+.prime-benefit-visual--experiences::after,
+.prime-benefit-visual--catalog-discounts::after,
+.prime-benefit-visual--home::after,
+.prime-benefit-visual--membership::after {
+  background: none;
+}
+
+.prime-benefit-visual--points {
+  background: #e8f7ef;
+}
+
+.prime-benefit-visual--experiences {
+  background: #fff0f8;
+}
+
+.prime-benefit-visual--catalog-discounts {
+  background: #fff7d9;
+}
+
+.prime-benefit-visual--home {
+  background: #eaf3ff;
+}
+
+.prime-benefit-visual--membership {
+  color: white;
+  background: var(--magenta);
+}
+
+.prime-benefit-feature {
+  position: relative;
+  z-index: 1;
+}
+
+.prime-benefit-feature--points {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, 230px);
+  min-height: 88px;
+  padding: 16px 18px;
+  background: white;
+  border: 1px solid rgba(0, 118, 74, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 14px 28px rgba(0, 86, 55, 0.12);
+}
+
+.prime-benefit-feature--points img {
+  width: 108px;
+  max-height: 42px;
+  object-fit: contain;
+}
+
+.prime-benefit-feature--points span {
+  color: var(--green);
+  font-family: var(--font-black);
+  font-size: 30px;
+}
+
+.prime-benefit-feature--experiences {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  gap: 8px;
+}
+
+.prime-benefit-feature--experiences span {
+  padding: 10px 12px;
+  color: var(--magenta);
+  background: white;
+  border: 1px solid rgba(178, 15, 133, 0.16);
+  border-radius: 999px;
+  font-family: var(--font-extrabold);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.prime-benefit-feature--experiences span:last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.prime-benefit-feature--discounts {
+  display: grid;
+  grid-template-columns: max-content 40px;
+  gap: 7px 10px;
+  align-items: center;
+  width: min(100%, 220px);
+  padding: 16px 18px;
+  color: var(--ink);
+  background: white;
+  border: 1px solid rgba(34, 34, 34, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 14px 28px rgba(75, 61, 13, 0.12);
+  font-family: var(--font-extrabold);
+  font-size: 14px;
+  line-height: 1.05;
+}
+
+.prime-benefit-feature--discounts strong {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  color: var(--magenta);
+  font-family: var(--font-black);
+  font-size: 44px;
+  line-height: 0.8;
+}
+
+.prime-benefit-feature--home {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid rgba(0, 89, 166, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 14px 28px rgba(21, 84, 138, 0.12);
+}
+
+.prime-benefit-feature--home span {
+  display: grid;
+  min-width: 112px;
+  min-height: 66px;
+  place-items: center;
+  color: white;
+  background: #1877c9;
+  font-family: var(--font-black);
+  font-size: 22px;
+}
+
+.prime-benefit-feature--home span + span {
+  color: var(--ink);
+  background: white;
+}
+
+.prime-benefit-feature--membership {
+  display: grid;
+  gap: 2px;
+  width: min(100%, 240px);
+  padding: 16px 18px;
+  color: var(--magenta);
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 14px 28px rgba(103, 3, 73, 0.2);
+}
+
+.prime-benefit-feature--membership span {
+  font-family: var(--font-extrabold);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.prime-benefit-feature--membership strong {
+  color: var(--magenta);
+  font-family: var(--font-black);
+  font-size: 42px;
+  line-height: 0.9;
+}
+
+.prime-benefit-visual > img {
+  width: 88px;
+  max-height: 88px;
+  padding: 9px;
+  object-fit: contain;
+  background: white;
+  border-radius: 8px;
+}
+
+.prime-benefit-visual p {
+  margin: auto 0 8px;
+  font-family: var(--font-medium);
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.16;
+}
+
+.prime-benefit-visual strong {
+  font-family: var(--font-black);
+  font-size: clamp(36px, 4vw, 54px);
+  line-height: 0.88;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.prime-benefit-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 64px;
+}
+
+.prime-benefit-logo-row img {
+  display: block;
+  width: auto;
+  max-width: 78px;
+  max-height: 38px;
+  object-fit: contain;
+}
+
+.prime-benefit-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(32px, 5vw, 58px);
+}
+
+.prime-benefit-eyebrow {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-family: var(--font-extrabold);
+  font-size: 13px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.prime-benefit-detail h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-black);
+  font-size: clamp(30px, 3.3vw, 42px);
+  line-height: 1.02;
+}
+
+.prime-benefit-detail > p:not(.prime-benefit-eyebrow) {
+  max-width: 540px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-family: var(--font-regular);
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.prime-benefit-detail ul {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 0;
+  color: var(--ink);
+  font-family: var(--font-medium);
+  font-size: 15px;
+  line-height: 1.35;
+  list-style: none;
+}
+
+.prime-benefit-detail li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.prime-benefit-detail li::before {
+  position: absolute;
+  left: 0;
+  color: var(--magenta);
+  content: "•";
+  font-size: 20px;
+  line-height: 0.85;
+}
+
+.prime-benefit-progress {
+  position: absolute;
+  z-index: 2;
+  right: clamp(32px, 5vw, 58px);
+  bottom: 22px;
+  width: 132px;
+  height: 5px;
+  overflow: hidden;
+  background: rgba(178, 15, 133, 0.16);
+  border-radius: 999px;
+}
+
+.prime-benefit-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--magenta);
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.prime-benefit-progress span.is-running {
+  animation: prime-benefit-progress 5s linear forwards;
+}
+
+.prime-benefit-progress span.is-paused {
+  animation-play-state: paused;
+}
+
+.prime-benefit-controls {
+  display: contents;
+}
+
+.prime-benefit-control {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  place-items: center;
+  color: var(--magenta-dark);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(122, 7, 92, 0.18);
+  border-radius: 50%;
+  box-shadow: 0 12px 34px rgba(44, 32, 48, 0.14);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.prime-benefit-control span {
+  font-family: var(--font-extrabold);
+  font-size: 34px;
+  line-height: 1;
+  transform: translateY(-2px);
+}
+
+.prime-benefit-control:hover,
+.prime-benefit-control:focus-visible {
+  color: white;
+  background: var(--magenta);
+  border-color: var(--magenta);
+  outline: none;
+}
+
+.prime-benefit-control[data-prime-benefit-previous] {
+  left: clamp(-60px, -6vw, -28px);
+}
+
+.prime-benefit-control[data-prime-benefit-next] {
+  right: clamp(-60px, -6vw, -28px);
+}
+
+@keyframes prime-benefit-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.monthly-section {
+  padding: clamp(24px, 2vw, 28px) clamp(20px, 6vw, 80px) clamp(58px, 8vw, 92px);
+  background: #fff8fc;
+}
+
+.monthly-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.monthly-heading {
+  margin-bottom: 26px;
+}
+
+.monthly-eyebrow {
+  margin: 0 0 8px;
+  color: var(--magenta);
+  font-family: var(--font-extrabold);
+  font-size: 13px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.monthly-heading h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-black);
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.05;
+}
+
+.monthly-heading > p:last-child {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-family: var(--font-medium);
+  font-size: 17px;
+}
+
+.monthly-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.monthly-card {
+  position: relative;
+  aspect-ratio: 2.2;
+  overflow: hidden;
+  border: 1px solid rgba(178, 15, 133, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 14px 28px rgba(44, 32, 48, 0.1);
+}
+
+.monthly-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/monthly-prime-placeholder.png");
+  background-repeat: no-repeat;
+  background-size: auto 300%;
+  transition: transform 500ms ease;
+}
+
+.monthly-card:hover .monthly-card-image {
+  transform: scale(1.035);
+}
+
+.monthly-card--wine .monthly-card-image {
+  background-position: center top;
+}
+
+.monthly-card--beer .monthly-card-image {
+  background-position: center;
+}
+
+.monthly-card--cheese .monthly-card-image {
+  background-position: center bottom;
+}
+
+html.reveal-ready [data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 620ms ease, transform 620ms ease;
+}
+
+html.reveal-ready [data-scroll-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.reveal-ready [data-reveal-delay="1"] {
+  transition-delay: 80ms;
+}
+
+html.reveal-ready [data-reveal-delay="2"] {
+  transition-delay: 160ms;
+}
+
+html.reveal-ready [data-reveal-delay="3"] {
+  transition-delay: 240ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-ready [data-scroll-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.alliances-section {
+  padding: clamp(58px, 8vw, 92px) clamp(20px, 6vw, 80px);
+  color: white;
+  background: #181818;
+}
+
+.alliances-inner {
   max-width: 1280px;
   margin: 0 auto;
 }
 
-.benefit-card {
-  grid-column: span 2;
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: 22px;
-  min-height: 136px;
-  padding: 22px;
-  background: var(--surface);
-  border: 1px solid #eeeeee;
-  border-radius: 8px;
-  box-shadow: 0 12px 30px rgba(44, 32, 48, 0.08);
-  cursor: pointer;
-  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+.alliances-heading {
+  margin-bottom: 24px;
 }
 
-.benefit-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(178, 15, 133, 0.18);
-  box-shadow: 0 16px 34px rgba(44, 32, 48, 0.1);
-}
-
-.benefit-card:nth-child(n + 4) {
-  grid-column: span 3;
-}
-
-.benefit-media {
-  display: grid;
-  place-items: center;
-  width: 96px;
-  height: 96px;
-  padding: 10px;
-  background: #ffffff;
-  border: 1px solid #eeeeee;
-  border-radius: 8px;
-  box-shadow: inset 0 0 0 1px rgba(178, 15, 133, 0.04);
-}
-
-.benefit-media img {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.benefit-media-row {
-  align-content: center;
-  gap: 5px;
-}
-
-.benefit-media-row img {
-  max-height: 26px;
-}
-
-.benefit-copy {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.benefit-copy h3 {
-  margin: 0 0 6px;
-  font-family: var(--font-bold);
-  font-size: 19px;
-  line-height: 1.2;
-}
-
-.benefit-copy p {
+.alliances-heading h2 {
   margin: 0;
-  color: var(--muted);
-  font-family: var(--font-regular);
+  font-family: var(--font-black);
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.08;
+}
+
+.alliances-heading p {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-medium);
   font-size: 17px;
 }
 
-.text-button {
-  align-self: flex-end;
-  margin-top: auto;
-  padding: 12px 0 0;
-  color: var(--ink);
+.alliances-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.alliance-card {
+  position: relative;
+  display: block;
+  grid-column: span 2;
+  aspect-ratio: 2.35;
+  overflow: hidden;
+  padding: 0;
   background: transparent;
   border: 0;
-  font: inherit;
-  font-family: var(--font-bold);
-  font-weight: 800;
+  border-radius: 8px;
   cursor: pointer;
+}
+
+.alliance-card:nth-child(n + 4) {
+  grid-column: span 3;
+}
+
+.alliance-card:focus-visible {
+  outline: 3px solid var(--magenta);
+  outline-offset: 3px;
+}
+
+/* Full-image alliance tiles retain the existing button and drawer behavior. */
+.alliance-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  transition: transform 280ms ease;
+}
+
+.alliance-card:hover .alliance-image,
+.alliance-card:focus-visible .alliance-image {
+  transform: scale(1.035);
+}
+
+.alliance-card--smiles .alliance-image {
+  background-image: url("../assets/alliances-prime-placeholder-one.png");
+  background-position: center top;
+}
+
+.alliance-card--shell .alliance-image {
+  background-image: url("../assets/alliances-prime-placeholder-one.png");
+  background-position: center;
+}
+
+.alliance-card--365 .alliance-image {
+  background-image: url("../assets/alliances-prime-placeholder-one.png");
+  background-position: center bottom;
+}
+
+.alliance-card--jumbo-mas .alliance-image {
+  background-image: url("../assets/alliances-prime-placeholder-two.png");
+  background-position: center top;
+}
+
+.alliance-card--support .alliance-image {
+  background-image: url("../assets/alliances-prime-placeholder-two.png");
+  background-position: center;
 }
 
 .benefit-drawer {
@@ -734,31 +1392,34 @@ a {
 }
 
 .drawer-logo {
-  display: grid;
-  place-items: center;
-  width: 104px;
-  height: 104px;
+  width: 148px;
+  aspect-ratio: 2.35;
   margin: 12px 0 28px;
-  padding: 14px;
-  background: white;
+  overflow: hidden;
+  background: #f3eef2;
   border: 1px solid rgba(178, 15, 133, 0.12);
   border-radius: 8px;
   box-shadow: 0 14px 34px rgba(44, 32, 48, 0.08);
 }
 
-.drawer-logo img {
+.drawer-image {
   display: block;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 
-.drawer-logo.is-row {
-  gap: 6px;
+.drawer-image--top {
+  background-position: center top;
 }
 
-.drawer-logo.is-row img {
-  max-height: 28px;
+.drawer-image--center {
+  background-position: center;
+}
+
+.drawer-image--bottom {
+  background-position: center bottom;
 }
 
 .drawer-eyebrow {
@@ -831,7 +1492,8 @@ a {
 .prime-carousel-section {
   position: relative;
   isolation: isolate;
-  padding-block: clamp(64px, 8vw, 96px);
+  padding-top: clamp(64px, 8vw, 96px);
+  padding-bottom: clamp(10px, 1vw, 12px);
   background:
     radial-gradient(circle at 16% 20%, rgba(120, 191, 58, 0.1), transparent 28%),
     radial-gradient(circle at 84% 18%, rgba(178, 15, 133, 0.1), transparent 26%),
@@ -864,6 +1526,7 @@ a {
   max-width: 1180px;
   min-height: 475px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .carousel-stage {
@@ -1374,16 +2037,26 @@ a {
   }
 
   .hero {
+    min-height: auto;
+  }
+
+  .hero-content {
     grid-template-columns: 1fr;
+    gap: 42px;
+    min-height: auto;
+    padding-block: 70px;
   }
 
-  .hero-media {
-    min-height: 280px;
+  .prime-access-card {
+    max-width: 500px;
   }
 
-  .benefits-grid,
   .site-footer {
     grid-template-columns: 1fr;
+  }
+
+  .alliances-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .prime-carousel {
@@ -1407,11 +2080,6 @@ a {
     right: 4px;
   }
 
-  .benefit-card,
-  .benefit-card:nth-child(n + 4) {
-    grid-column: span 1;
-  }
-
   .footer-brand {
     justify-self: start;
   }
@@ -1431,30 +2099,147 @@ a {
     padding: 0 16px;
   }
 
-  .hero-copy {
-    padding: 34px 20px 42px;
+  .hero-content {
+    gap: 32px;
+    padding: 54px 20px 42px;
   }
 
   .hero h1 {
-    font-size: 34px;
+    font-size: 42px;
   }
 
-  .benefit-card {
-    grid-template-columns: 74px 1fr;
-    gap: 16px;
-    padding: 16px;
-  }
-
-  .benefit-media {
-    width: 74px;
-    height: 74px;
-    padding: 8px;
-  }
-
-  .benefit-copy p,
-  .hero-text,
-  .price-line {
+  .hero-text {
     font-size: 16px;
+  }
+
+  .prime-access-card {
+    padding: 24px 20px;
+  }
+
+  .prime-access-card h2 {
+    font-size: 25px;
+  }
+
+  .prime-benefit-carousel {
+    width: calc(100% - 48px);
+    height: 720px;
+  }
+
+  .prime-benefit-slide {
+    grid-template-columns: 1fr;
+    grid-template-rows: 218px 1fr;
+  }
+
+  .prime-benefit-visual {
+    min-height: 218px;
+    padding: 24px;
+  }
+
+  .prime-benefit-visual > img {
+    width: 72px;
+    max-height: 72px;
+  }
+
+  .prime-benefit-visual strong {
+    font-size: 38px;
+  }
+
+  .prime-benefit-feature--points {
+    min-height: 72px;
+    padding: 12px 14px;
+  }
+
+  .prime-benefit-feature--points img {
+    width: 92px;
+  }
+
+  .prime-benefit-feature--experiences span {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .prime-benefit-feature--discounts {
+    width: 196px;
+    padding: 12px 14px;
+  }
+
+  .prime-benefit-feature--home span {
+    min-width: 92px;
+    min-height: 54px;
+    font-size: 18px;
+  }
+
+  .prime-benefit-feature--membership {
+    padding: 12px 14px;
+  }
+
+  .prime-benefit-feature--membership strong {
+    font-size: 35px;
+  }
+
+  .prime-benefit-detail {
+    justify-content: flex-start;
+    padding: 30px 24px 46px;
+  }
+
+  .prime-benefit-detail > p:not(.prime-benefit-eyebrow) {
+    margin-top: 14px;
+    font-size: 16px;
+  }
+
+  .prime-benefit-detail ul {
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .prime-benefit-progress {
+    right: 24px;
+    bottom: 20px;
+    width: 96px;
+  }
+
+  .prime-benefit-controls {
+    display: contents;
+  }
+
+  .prime-benefit-control {
+    top: 50%;
+    width: 42px;
+    height: 42px;
+  }
+
+  .prime-benefit-control[data-prime-benefit-previous] {
+    left: -44px;
+  }
+
+  .prime-benefit-control[data-prime-benefit-next] {
+    right: -44px;
+  }
+
+  .monthly-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .monthly-card {
+    min-height: 0;
+  }
+
+  .monthly-heading > p:last-child {
+    font-size: 16px;
+  }
+
+  .alliances-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .alliance-card {
+    grid-column: span 1;
+    min-height: 0;
+  }
+
+  .alliance-card:nth-child(n + 4) {
+    grid-column: span 1;
   }
 
   .prime-carousel-section {
@@ -1499,8 +2284,7 @@ a {
   }
 
   .drawer-logo {
-    width: 86px;
-    height: 86px;
+    width: 132px;
     margin-bottom: 22px;
   }
 
@@ -1508,5 +2292,51 @@ a {
     min-height: 64px;
     padding: 0 18px;
     font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-actions {
+    gap: 8px;
+  }
+
+  .subscribe-button,
+  .outline-button {
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  .prime-benefit-carousel {
+    height: 760px;
+  }
+
+  .prime-benefit-visual {
+    padding: 16px 18px;
+  }
+
+  .prime-benefit-visual strong {
+    font-size: 28px;
+  }
+
+  .prime-benefit-detail {
+    padding: 24px 18px 46px;
+  }
+
+  .prime-benefit-detail h3 {
+    font-size: 28px;
+  }
+
+  .prime-benefit-control {
+    width: 38px;
+    height: 38px;
+  }
+
+  .prime-benefit-control[data-prime-benefit-previous] {
+    left: -41px;
+  }
+
+  .prime-benefit-control[data-prime-benefit-next] {
+    right: -41px;
   }
 }
