@@ -3,6 +3,9 @@ select benefit_key,
        eyebrow,
        title,
        summary,
+       image_path,
+       image_position,
+       image_square_yn,
        display_order,
        'javascript:PrimeLanding.drawer.open(''' ||
          apex_escape.js_literal(benefit_key) || ''');' as target_url

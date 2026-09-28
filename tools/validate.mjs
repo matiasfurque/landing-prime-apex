@@ -12,6 +12,7 @@ const requiredRegions = [
   "offers",
   "monthly",
   "alliances",
+  "shipping",
   "benefit-drawer",
   "faq",
   "footer"

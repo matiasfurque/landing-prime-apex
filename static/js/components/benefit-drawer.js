@@ -8,7 +8,7 @@
   const getDrawer = () => document.querySelector("[data-benefit-drawer]");
 
   const mergeWithFallback = (benefitKey, payload) => {
-    const fallback = namespace.allianceDetails[benefitKey];
+    const fallback = namespace.benefitDetails[benefitKey];
 
     if (!fallback) return payload;
 
@@ -24,7 +24,7 @@
     const processName = namespace.config.benefitProcess;
 
     if (!processName || !window.apex?.server?.process) {
-      return Promise.resolve(namespace.allianceDetails[benefitKey]);
+      return Promise.resolve(namespace.benefitDetails[benefitKey]);
     }
 
     return new Promise((resolve, reject) => {
@@ -44,7 +44,7 @@
           error: (_request, status, error) => reject(new Error(error || status))
         }
       );
-    }).catch(() => namespace.allianceDetails[benefitKey]);
+    }).catch(() => namespace.benefitDetails[benefitKey]);
   };
 
   const renderBenefit = (drawer, detail) => {
@@ -59,7 +59,8 @@
 
     const imageElement = document.createElement("span");
     imageElement.className = `drawer-image drawer-image--${image.position || "center"}`;
-    imageElement.style.backgroundImage = `url("${namespace.assetUrl(image.src || "assets/alliances-prime-placeholder-one.png")}")`;
+    imageElement.style.backgroundImage = `url("${namespace.assetUrl(image.src || "assets/benefits/benefit-points-v1.png")}")`;
+    imageHost.classList.toggle("drawer-logo--square", image.square === true);
     imageHost.replaceChildren(imageElement);
 
     listHost.replaceChildren(
@@ -85,7 +86,7 @@
 
   const open = async (benefitKey, trigger) => {
     const drawer = getDrawer();
-    const fallback = namespace.allianceDetails[benefitKey];
+    const fallback = namespace.benefitDetails[benefitKey];
 
     if (!drawer || !fallback) return;
 

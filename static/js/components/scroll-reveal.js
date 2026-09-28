@@ -6,13 +6,16 @@
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const selectors = [
     ".benefits-section .section-heading",
-    ".prime-benefit-carousel",
+    ".prime-benefits-grid",
+    ".prime-benefit-card",
     ".offers-section .section-heading",
     ".prime-carousel",
     ".monthly-heading",
     ".monthly-card",
     ".alliances-heading",
     ".alliance-card",
+    ".shipping-costs",
+    ".shipping-guarantee",
     ".faq-inner",
     ".site-footer"
   ];

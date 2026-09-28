@@ -27,10 +27,10 @@ landing prime apex/
 
 - Intro con elefantito y respeto por `prefers-reduced-motion`.
 - Header y hero con rutas reales de registro e ingreso.
-- Carrusel autónomo de Beneficios Prime, con controles, pausa en interacción y soporte táctil.
+- Cards de Beneficios Prime con imágenes intercambiables y panel lateral de detalle accesible.
 - Carrusel de Ofertas semanales, con progreso, controles y soporte táctil.
-- Secciones independientes de Mensuales Prime y Alianzas.
-- Panel lateral accesible para el detalle de alianzas, con fallback local y proceso AJAX de APEX.
+- Secciones independientes de Mensuales Prime, Alianzas, envíos y garantía asegurada.
+- Panel lateral accesible para el detalle de beneficios y alianzas, con fallback local y proceso AJAX de APEX.
 - FAQ accesible y animaciones de aparición idempotentes, compatibles con refresh de regiones APEX.
 
 ## Vista previa local
@@ -54,6 +54,8 @@ Luego abrir `http://127.0.0.1:4174/preview/`.
 7. Crear el proceso AJAX `GET_PRIME_BENEFIT` desde `apex/processes/get_prime_benefit.sql`.
 8. Pegar `page-global-config.js` en **Function and Global Variable Declaration**.
 9. En una Dynamic Action **After Refresh** de cualquier región dinámica, ejecutar `PrimeLanding.init(document);`.
+
+Para actualizar una instalación APEX que ya usaba la versión anterior, ejecutar primero `apex/sql/04_sync_current_landing.sql` y luego volver a ejecutar `apex/sql/02_seed_data.sql`.
 
 Los recursos usan `#APP_FILES#` en el HTML y rutas relativas dentro del CSS, por lo que funcionan en cualquier ambiente APEX después de cargar los Static Application Files.
 

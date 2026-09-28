@@ -5,12 +5,17 @@ create table jp_benefit (
   eyebrow       varchar2(120 char)  not null,
   title         varchar2(200 char)  not null,
   summary       varchar2(1000 char) not null,
+  image_path    varchar2(255 char),
+  image_position varchar2(12 char) default 'center' not null,
+  image_square_yn char(1 char) default 'N' not null,
   display_order number              default 10 not null,
   active_yn     char(1 char)         default 'Y' not null,
   created_at    timestamp with local time zone default systimestamp not null,
   updated_at    timestamp with local time zone default systimestamp not null,
   constraint jp_benefit_pk primary key (benefit_key),
-  constraint jp_benefit_active_ck check (active_yn in ('Y', 'N'))
+  constraint jp_benefit_active_ck check (active_yn in ('Y', 'N')),
+  constraint jp_benefit_image_position_ck check (image_position in ('top', 'center', 'bottom')),
+  constraint jp_benefit_image_square_ck check (image_square_yn in ('Y', 'N'))
 );
 
 create table jp_benefit_logo (

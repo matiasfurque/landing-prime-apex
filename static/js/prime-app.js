@@ -7,7 +7,6 @@
     const scope = root || document;
 
     namespace.intro?.init(scope);
-    namespace.benefitCarousel?.init(scope);
     namespace.drawer?.init(scope);
     namespace.carousel?.init(scope);
     namespace.faq?.init(scope);
